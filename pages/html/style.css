@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+
+body {
+  height: 100%;
+  width: 100%;
+  background: #e9e9e9;
+  font-family: 'Arimo', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #ffffff;
+  background-image: url(https://captaindroid.com/wp-content/uploads/2019/02/530968-cool-theater-backgrounds-1920x1080-for-xiaomi.jpg);
+}
+
+* {
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+h1, h2, h3, h4, h5, p {
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #6ABCEA;
+  border-image-width: 30px;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 100%;
+  margin-top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.movie-card {
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 315px;
+  margin: 2em;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.movie-header {
+  padding: 0;
+  margin: 0;
+  height: 367px;
+  width: 100%;
+  display: block;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  
+
+}
+
+.Avangers, img {
+  /* background: url("https://m.media-amazon.com/images/M/MV5BNGZiMzBkZjMtNjE3Mi00MWNlLWIyYjItYTk3MjY0Yjg5ODZkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_SX300.jpg"); */
+  object-fit: cover;
+  display: initial;
+  margin-left: auto;
+  margin-right: auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px; 
+  width: 315px;
+  /* background-color: rgba(0, 0, 0, 0.644) !important; */
+}
+
+
+.movie-card:hover {
+  -webkit-transform: scale(1.03);
+          transform: scale(1.03);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.movie-content {
+  padding: 18px 18px 24px 18px;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.644);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.movie-content-header{
+  display: table;
+  width: 100%;
+  text-align: center;
+ 
+}
+
+.movie-title {
+  font-size: 24px;
+  margin: 0;
+  display: table-cell;
+}
+
+
