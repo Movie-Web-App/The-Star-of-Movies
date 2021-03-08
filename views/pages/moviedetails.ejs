@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-
-
-
-   
-</body>
-</html>
+<main>
+      <div>
+          <img src=<%= movie.image %> alt="image">
+          <h3><%= movie.title %></h3>
+          <h4><%= movie.year %></h4>
+          <h5><%= movie.Runtime %></h5>
+          <p><%= movie.Plot %></p>
+         <ul>
+           <% movie.Actors.map(value=>{ %>
+                <li><%= value %></li>
+            <% }) %>
+         </ul>
+         <h4><%= movie.imDbRating %></h4>
+        </div>
+        <iframe width="727" height="409" src="<%= movie.trailer.linkEmbed %> " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</main>

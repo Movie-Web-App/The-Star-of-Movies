@@ -1,35 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
-    <style>
-        li{
-            list-style-type: none;
-        }
-    </style>
-</head>
-<body>
-    <ul>
+    <main>
+        <div class="container-for-films">
         <% movies.forEach(movie => {  %>
-            <!-- <form action="/details" method="POST"> -->
-            
-            <li><img src="<%= movie.image %>" alt="" id="movieImg"> </li>
-            <li><%= movie.title %></li>
-            <li><%= movie.imDbRating %></li>
-            <li><%= movie.year %> </li> 
-            
-            <!-- <li><button type="submit"></button></li> -->
-             
-      <%  }); %>
-        <!-- </form> -->
-    </ul>
+            <div class="favorite-list-div">
+                <img src="<%= movie.image %>" alt="poster">
+                <h2><%= movie.title %></h2>
+                <h4><%= movie.year %> </h4> 
+                <% if (movie.imDbRating/2 === 5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 5 && movie.imDbRating/2 >= 4.5){ %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                     <% } %>
+                <% if (movie.imDbRating/2 < 4.5 && movie.imDbRating/2 >= 4) { %>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 4 && movie.imDbRating/2 >= 3.5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 3.5 && movie.imDbRating/2 >= 3) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 3 && movie.imDbRating/2 >= 2.5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 2.5 && movie.imDbRating/2 >= 2) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <%  if (movie.imDbRating/2 < 2 && movie.imDbRating/2 >= 1.5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <%  if (movie.imDbRating/2 < 1.5 && movie.imDbRating/2 >= 1) { %>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 1) { %>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <div class="form-buttons">
+                    <form action="/moviedetails/<%= movie.id %>" method="GET">
+                        <br>
+                        <a href="/pages/moviedetails" id="info" class="tooltip"><i class="fas fa-info"></i> <span class="tooltiptext">More Details</span></a>
+                    </form> 
+                    <br>
+                    <br>
+                </div>
+                <form action="/moviedetails/<%= movie.id %>" method="POST">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <input type="hidden" name="image_url" value="<%= movie.image %>">
+                    <input type="hidden" name="title" value="<%= movie.title %>">
+                    <input type="hidden" name="description" value="<%= movie.Plot %>">
+                    <input type="hidden" name="actors" value="<%= movie.Actors %>">
+                    <input type="hidden" name="year" value="<%= movie.year %>">
+                    <input type="hidden" name="imDbRating" value="<%= movie.imDbRating %>">
+                    <input type="hidden" name="runtime" value="<%= movie.Runtime %>">
+                  </form>
+            </div>
+        <%  }); %>
+        </div>
+    </main>
 
+    
+        
+            
+            
+           
+           
+          
    
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="app.js"></script> -->
-</body>
-</html>
