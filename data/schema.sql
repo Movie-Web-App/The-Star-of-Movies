@@ -1,29 +1,34 @@
 DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS movies_id;
 
 CREATE TABLE IF NOT EXISTS movies (
+
   id SERIAL PRIMARY KEY,
-  title VARCHAR(255),
-  realese_year CHAR(255),
-  rating CHAR(255),
-  realese_date CHAR(255),
-  runtime CHAR(255),
-  genres CHAR(255),
-  director CHAR(255),
-  writer CHAR(255),
-  actors VARCHAR(255),
-  plot_Summary CHAR(255),
-  languages CHAR(255),
-  country CHAR(255),
-  awards_won CHAR(255),
-  movie_poster VARCHAR(255),
-  ratings_recieved CHAR(255),
-  metascore CHAR(255),
-  imdb_rating CHAR(255),
-  imdb_votes CHAR(255),
-  imdb_id CHAR(255),
-  type CHAR(255),
-  dvd_info CHAR(255),
-  box_office_results CHAR(255),
-  production_company CHAR(255),
-  website CHAR(255)
-  };
+  Title VARCHAR(255),
+  Year VARCHAR(255),
+  Runtime VARCHAR(255),
+  Genre VARCHAR(255),
+  Actors VARCHAR(255),
+  Plot VARCHAR(255),
+  image VARCHAR(255),
+  crew VARCHAR(255),
+  imDbRating VARCHAR(255),
+  imDbRatingCount VARCHAR(255) 
+  );
+
+--  duration, genres, actors, plot_Summary, languages, imdb_id
+CREATE TABLE movies_id (
+  id SERIAL PRIMARY KEY,
+  imdb_id VARCHAR(255) references movies(id)  
+);
+
+
+  CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255),
+    useremail CHAR(255),
+    password CHAR(255)
+    )
+
+
