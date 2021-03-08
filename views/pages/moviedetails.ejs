@@ -1,0 +1,16 @@
+<main>
+      <div>
+          <img src=<%= movie.image %> alt="image">
+          <h3><%= movie.title %></h3>
+          <h4><%= movie.year %></h4>
+          <h5><%= movie.Runtime %></h5>
+          <p><%= movie.Plot %></p>
+         <ul>
+           <% movie.Actors.map(value=>{ %>
+                <li><%= value %></li>
+            <% }) %>
+         </ul>
+         <h4><%= movie.imDbRating %></h4>
+        </div>
+        <iframe width="727" height="409" src="<%= movie.trailer.linkEmbed %> " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</main>
