@@ -1,16 +1,18 @@
 <main>
+
+  <% movie.forEach(item=>{ %>
       <div>
-          <img src=<%= movie.image %> alt="image">
-          <h3><%= movie.title %></h3>
-          <h4><%= movie.year %></h4>
-          <h5><%= movie.Runtime %></h5>
-          <p><%= movie.Plot %></p>
-         <ul>
-           <% movie.Actors.map(value=>{ %>
-                <li><%= value %></li>
-            <% }) %>
-         </ul>
-         <h4><%= movie.imDbRating %></h4>
-        </div>
-        <iframe width="727" height="409" src="<%= movie.trailer.linkEmbed %> " frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <img src=<%= item.image %> alt="image">
+          <h3><%= item.title %></h3>
+          <h4><%= item.year %></h4>
+          <h5><%= item.runtime %></h5>
+          <p><%= item.plot %></p>
+         <h4><%= item.imdb_rate %></h4>
+     
+        <script>
+        $('body').css('backgroundImage','url(<%= item.image%>)');
+        </script>
+        <iframe width="900" height="450"  src= "<%= item.trailer%>" frameborder="0" allowfullscreen></iframe>
+        <%})  %>
+      </div> 
 </main>

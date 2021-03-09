@@ -1,9 +1,10 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 body {
-    background-image: url(https://captaindroid.com/wp-content/uploads/2019/02/530968-cool-theater-backgrounds-1920x1080-for-xiaomi.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin:0
+  background-image: url(https://captaindroid.com/wp-content/uploads/2019/02/530968-cool-theater-backgrounds-1920x1080-for-xiaomi.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  width: 100%;
 }
