@@ -1,0 +1,89 @@
+
+    <main>
+        <div class="container-for-films">
+        <% movies.forEach(movie => {  %>
+            <div class="favorite-list-div">
+                <img src="<%= movie.image %>" alt="poster">
+                <h2><%= movie.title %></h2>
+                <h4><%= movie.year %> </h4> 
+                <% if (movie.imDbRating/2 === 5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 5 && movie.imDbRating/2 >= 4.5){ %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                     <% } %>
+                <% if (movie.imDbRating/2 < 4.5 && movie.imDbRating/2 >= 4) { %>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 4 && movie.imDbRating/2 >= 3.5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 3.5 && movie.imDbRating/2 >= 3) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 3 && movie.imDbRating/2 >= 2.5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 2.5 && movie.imDbRating/2 >= 2) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <%  if (movie.imDbRating/2 < 2 && movie.imDbRating/2 >= 1.5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <%  if (movie.imDbRating/2 < 1.5 && movie.imDbRating/2 >= 1) { %>
+                    <span class="fa fa-star checked"></span>
+                <% } %>
+                <% if (movie.imDbRating/2 < 1) { %>
+                    <span><i class="fas fa-star-half"></i></span>
+                <% } %>
+                <div class="form-buttons">
+                    <form action="/moviedetails/<%= movie.id %>" method="GET">
+                        <br>
+                        <a href="/pages/moviedetails" id="info" class="tooltip"><i class="fas fa-info"></i> <span class="tooltiptext">More Details</span></a>
+                    </form> 
+                    <br>
+                    <br>
+                </div>
+                <form action="/moviedetails/<%= movie.id %>" method="POST">
+                    <input type="hidden" name="id" value="<%= movie.id %>">
+                    <input type="hidden" name="image_url" value="<%= movie.image %>">
+                    <input type="hidden" name="title" value="<%= movie.title %>">
+                    <input type="hidden" name="description" value="<%= movie.Plot %>">
+                    <input type="hidden" name="actors" value="<%= movie.Actors %>">
+                    <input type="hidden" name="year" value="<%= movie.year %>">
+                    <input type="hidden" name="imDbRating" value="<%= movie.imDbRating %>">
+                    <input type="hidden" name="runtime" value="<%= movie.Runtime %>">
+                  </form>
+            </div>
+        <%  }); %>
+        </div>
+    </main>
+
+    
+        
+            
+            
+           
+           
+          
+   
