@@ -19,10 +19,18 @@ server.use(override("_method"));
 server.use(layout);
 server.use(express.static("./public"));
 server.get("/", home);
+server.get("/signup", signup);
+server.get("/signin", signin);
 server.get("/details", detailHandler);
 server.get("/search", searchHandler);
 server.get("/databaseinit", databaseinit);
 
+function signin(req,res) {
+  res.render("pages/login")
+}
+function signup(req,res) {
+  res.render("pages/signup")
+}
 var movies_ids = [];
 let flag = true;
 
@@ -126,7 +134,7 @@ function home(req, res) {
 function searchHandler(req, res) {
 
   let searchedMov=[]
-  const key = process.env.IMDB_KEY1;
+  const key = process.env.IMDB_KEY2;
   let title =null
   if (req.query.search)
   title= capitalizeTheFirstLetterOfEachWord(req.query.search);

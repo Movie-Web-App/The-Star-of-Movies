@@ -2,58 +2,59 @@
     <main>
         <div class="container-for-films">
         <% movies.forEach(movie => {  %>
+            <%= console.log(movie.imdb_rate) %> 
             <div class="favorite-list-div">
                 <img src="<%= movie.image %>" alt="poster">
                 <h2><%= movie.title %></h2>
                 <h4><%= movie.year %> </h4> 
-                <% if (movie.imDbRating/2 === 5) { %>
+                <% if (+movie.imdb_rate/2 === 5) { %>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                 <% } %>
-                <% if (movie.imDbRating/2 < 5 && movie.imDbRating/2 >= 4.5){ %>
+                <% if (+movie.imdb_rate/2 < 5 && +movie.imdb_rate/2 >= 4.5){ %>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span><i class="fas fa-star-half"></i></span>
                      <% } %>
-                <% if (movie.imDbRating/2 < 4.5 && movie.imDbRating/2 >= 4) { %>
+                <% if (+movie.imdb_rate/2 < 4.5 && +movie.imdb_rate/2 >= 4) { %>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                 <% } %>
-                <% if (movie.imDbRating/2 < 4 && movie.imDbRating/2 >= 3.5) { %>
+                <% if (+movie.imdb_rate/2 < 4 && +movie.imdb_rate/2 >= 3.5) { %>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span><i class="fas fa-star-half"></i></span>
                 <% } %>
-                <% if (movie.imDbRating/2 < 3.5 && movie.imDbRating/2 >= 3) { %>
+                <% if (movie.imdb_rate/2 < 3.5 && movie.imdb_rate/2 >= 3) { %>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                 <% } %>
-                <% if (movie.imDbRating/2 < 3 && movie.imDbRating/2 >= 2.5) { %>
+                <% if (movie.imdb_rate/2 < 3 && movie.imdb_rate/2 >= 2.5) { %>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span><i class="fas fa-star-half"></i></span>
                 <% } %>
-                <% if (movie.imDbRating/2 < 2.5 && movie.imDbRating/2 >= 2) { %>
+                <% if (movie.imdb_rate/2 < 2.5 && movie.imdb_rate/2 >= 2) { %>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                 <% } %>
-                <%  if (movie.imDbRating/2 < 2 && movie.imDbRating/2 >= 1.5) { %>
+                <%  if (movie.imdb_rate/2 < 2 && movie.imdb_rate/2 >= 1.5) { %>
                     <span class="fa fa-star checked"></span>
                     <span><i class="fas fa-star-half"></i></span>
                 <% } %>
-                <%  if (movie.imDbRating/2 < 1.5 && movie.imDbRating/2 >= 1) { %>
+                <%  if (movie.imdb_rate/2 < 1.5 && movie.imdb_rate/2 >= 1) { %>
                     <span class="fa fa-star checked"></span>
                 <% } %>
-                <% if (movie.imDbRating/2 < 1) { %>
+                <% if (movie.imdb_rate/2 < 1) { %>
                     <span><i class="fas fa-star-half"></i></span>
                 <% } %>
                 <div class="form-buttons">
@@ -68,10 +69,6 @@
             </div>
         <%  }); %>
         </div>
-        <form action="/" method="get" >
-         <input type="hidden" value="10" style="display:none" name="pagination">
-         <input type="submit" value="Load More">
-        </form>
     </main>
 
     
