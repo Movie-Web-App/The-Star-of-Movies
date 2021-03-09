@@ -1,4 +1,3 @@
-
 "use strict";
 
 const express = require("express");
@@ -16,23 +15,17 @@ const client = new pg.Client(process.env.DATABASE_URL);
 server.use(cors());
 
 server.set("view engine", "ejs");
-
 server.use(override("_method"));
-
 server.use(layout);
-
 server.use(express.static("./public"));
-
 server.get("/", home);
-
 server.get("/details", detailHandler);
-
 server.get("/search", searchHandler);
-
 server.get("/databaseinit", databaseinit);
 
 var movies_ids = [];
 let flag = true;
+
 function databaseinit(req, res) {
   let key = process.env.IMDB_KEY1;
   let url = `https://imdb-api.com/en/API/Top250Movies/${key}`;
@@ -51,7 +44,7 @@ function databaseinit(req, res) {
           .then((results) => {
             // console.log(results);
             if (results.rowCount == 0) {
-              flag = false;
+      
               let url2 = `https://imdb-api.com/en/API/Title/${key}/${item}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`;
               superagent.get(url2).then((results) => {
                 let result = results.body;
@@ -108,6 +101,17 @@ function Movie(moviesData) {
   this.trailer = moviesData.trailer;
   this.rate = moviesData.rate;
 }
+
+function capitalizeTheFirstLetterOfEachWord(words) {
+  var separateWord = words.toLowerCase().split(' ');
+  for (var i = 0; i < separateWord.length; i++) {
+     separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
+     separateWord[i].substring(1);
+  }
+  return separateWord.join(' ');
+}
+
+
 let pagination = 10;
 function home(req, res) {
   if (req.query.pagination) {
@@ -120,18 +124,66 @@ function home(req, res) {
 }
 
 function searchHandler(req, res) {
-  let key = process.env.OMDB_KEY1;
-  let title = req.query.title;
-  // let URL=`https://imdb-api.com/en/API/SearchMovie/k_ksrwxn1u/${title}`
-  let URL = `http://www.omdbapi.com/?t=${title}&apikey=${key}`;
-  superagent.get(URL).then((results) => {
-    let movies = results.body;
-    console.log(movies);
-    let searchedMov = movies.map((movie) => {
-      return new Movie(movie);
-    });
-    res.render("pages/search", { movies: searchedMov });
-  });
+  let searchedMov=[]
+  const key = process.env.IMDB_KEY1;
+  let title =null
+  if (req.query.search)
+  title= capitalizeTheFirstLetterOfEachWord(req.query.search);
+  else 
+  res.redirect("/")
+  let SQL = `SELECT * FROM movies WHERE title LIKE '%${title}%' ;`
+
+  client.query(SQL)
+  .then(data =>{
+   
+    if (data.rowCount==0){
+
+     let URL=`https://imdb-api.com/en/API/Search/${key}/${title}`  
+      superagent.get(URL).then((results) => {
+        results.body.results.map(item=>{
+        let url2 = `https://imdb-api.com/en/API/Title/${key}/${item.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`;
+              superagent.get(url2).then((results) => {
+                let result = results.body;
+                let actors = result.actorList.reduce((acc, cur) => {
+                  return (acc += cur.name + " , ");
+                }, "");
+                let SQL = `INSERT INTO movies(imdb_id,title,year,image,stars,runtime,genre,actors,plot,trailer,imDb_rate,metacritic_rate,theMovieDb_rate,rottenTomatoes_rate) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning * `;
+                let safeValues = [
+                  result.id,
+                  result.title,
+                  result.year,
+                  result.image,
+                  result.stars,
+                  result.runtimeMins,
+                  result.genres,
+                  actors,
+                  result.plot,
+                  result.trailer.linkEmbed,
+                  result.ratings.imDb,
+                  result.ratings.metacritic,
+                  result.ratings.theMovieDb,
+                  result.ratings.rottenTomatoes,
+                ];
+                client.query(SQL, safeValues).then((returnedData)=>{
+                  searchedMov.push(returnedData)
+                });
+              
+              });
+            })    
+
+      }).then(()=>{
+        console.log(searchedMov);
+        res.render("pages/moviespage", { movies: searchedMov });
+      })
+      .catch((error)=>{
+        res.json(error)
+      });
+     }else {
+     // res.json(result)
+     res.render("pages/moviespage", { movies: data.rows });
+
+     }
+  }) 
 }
 
 function detailHandler(req, res) {
