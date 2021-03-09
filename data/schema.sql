@@ -20,15 +20,15 @@ CREATE TABLE  movies (
 metacritic_rate TEXT,
 theMovieDb_rate TEXT,
 rottenTomatoes_rate TEXT
-  );
+);
 
 
 
-  CREATE TABLE users (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255),
     useremail CHAR(255),
     password CHAR(255)
-    )
+)
 
 
