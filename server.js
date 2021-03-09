@@ -27,7 +27,7 @@ var movies_ids = [];
 let flag = true;
 
 function databaseinit(req, res) {
-  let key = process.env.IMDB_KEY1;
+  let key = process.env.IMDB_KEY6;
   let url = `https://imdb-api.com/en/API/Top250Movies/${key}`;
   superagent
     .get(url)
@@ -124,6 +124,7 @@ function home(req, res) {
 }
 
 function searchHandler(req, res) {
+
   let searchedMov=[]
   const key = process.env.IMDB_KEY1;
   let title =null
@@ -193,6 +194,37 @@ function detailHandler(req, res) {
     res.render("pages/moviedetails", { movie: results.rows });
   });
 }
+
+
+// server.get("/FavoriteList/:id", (req, res) => {
+//   let id = req.query.id;
+//   let SQL = `SELECT * FROM movies WHERE id=$1;`;
+//   let values = [id];
+//   client.query(SQL, values)
+//       .then((result) => {
+//           console.log('MAKE SURE',result.rows[0]);
+//           res.render('moviedetails', { item :result.rows[0]});
+//           // res.render('pages/books/show', { book :result.rows[0]});
+//       })
+//       .catch(() => {
+//           errorHandler('Error in getting Database');
+//       });
+// });
+
+// server.post('/FavoriteList/:id', (req, res) => {
+//   console.log(req.body);
+//   let id = req.params.id;
+//   let newSQL = `INSERT INTO usersmovies (title, year, image) VALUES ($1, $2, $3) RETURNING id;`;
+//   let newValues = [req.body.title, req.body.year, req.body.image];
+
+//   return client.query(newSQL, newValues)
+//     .then(result => {
+//       res.redirect(`/FavoriteList/${result.rows[0].id}`);
+//     })
+//     .catch(()=>{
+//               errorHandler('Error in getting data!!');
+//           })
+// })
 
 client.connect().then(() => {
   server.listen(PORT, () => {

@@ -1,12 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 * {
   box-sizing: border-box;
+  /* font-family: 'Poppins', sans-serif; */
 }
 body {
-  background-image: url(https://captaindroid.com/wp-content/uploads/2019/02/530968-cool-theater-backgrounds-1920x1080-for-xiaomi.jpg);
+  background-image: url(https://images.pexels.com/photos/3921045/pexels-photo-3921045.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0;
-  width: 100%;
+  background-attachment: fixed;
+  margin:0;
 }
 

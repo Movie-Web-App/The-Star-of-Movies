@@ -3,26 +3,39 @@
 
   <% movie.forEach(item=>{ %>
   
-
-      <div class="movie_card" id="bright">
-        <div class="info_section">
-          <div class="movie_header">
+    <div class="movie_card" id="bright">
+      <div class="info_section">
+        <div class="movie_header">
+            <form action="/FavoriteList/id=<% item.imdb_id %> " method="GET">
+              <button type="submit" id="favorite-button" class="tooltip"><i class="far fa-heart"></i><span class="tooltiptext">Add to Favorite List</span></button>
+            </form>
             <img class="locandina" src=<%= item.image %> >
             <h1><%= item.title %></h1>
             <h4><%= item.year %></h4>
-            <span class="minutes"><%= item.runtime%></span>
-            <p class="type"><%= item.genre %> </p>
-          </div>
-          <div class="movie_desc">
-            <p class="text">
-              <%= item.plot %>
-            </p>
+            <!-- Convert to stars -->
+            <h4><%= item.metacritic_rate %></h4>
+            <span class="minutes">Duration: <%= item.runtime%> Minutes</span>
+            <br>
+            <h3 class="type">Category: <%= item.genre %> </h3>
+            <br>
+            <br>
+            <h4 class="actors">Actors: <%= item.stars %></h4>
+            <br>
+            <br>
+            <div class="movie_desc">
+              <p class="text">
+           <%= item.plot %>
+              </p>
+            </div>
           </div>
           <div class="video-div">
-            <iframe width="727" height="409" src="<%= item.trailer%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="860" height="409" src="<%= item.trailer%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             </div>
+            </div>
+            
             <%})  %>
+
 
 
 
