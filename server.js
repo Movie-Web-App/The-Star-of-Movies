@@ -107,7 +107,7 @@ function Movie(moviesData) {
   this.trailer = moviesData.trailer;
   this.rate = moviesData.rate;
 }
-let pagination = 3;
+let pagination = 10;
 function home(req, res) {
   if (req.query.pagination) {
     pagination += +req.query.pagination;
