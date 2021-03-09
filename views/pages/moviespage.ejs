@@ -59,24 +59,19 @@
                 <div class="form-buttons">
                     <form action="/moviedetails/<%= movie.id %>" method="GET">
                         <br>
-                        <a href="/pages/moviedetails" id="info" class="tooltip"><i class="fas fa-info"></i> <span class="tooltiptext">More Details</span></a>
+                        <a href="/details?id=<%= movie.id %>" id="info" class="tooltip"><i class="fas fa-info"></i> <span class="tooltiptext">More Details</span></a>
                     </form> 
                     <br>
                     <br>
                 </div>
-                <form action="/moviedetails/<%= movie.id %>" method="POST">
-                    <input type="hidden" name="id" value="<%= movie.id %>">
-                    <input type="hidden" name="image_url" value="<%= movie.image %>">
-                    <input type="hidden" name="title" value="<%= movie.title %>">
-                    <input type="hidden" name="description" value="<%= movie.Plot %>">
-                    <input type="hidden" name="actors" value="<%= movie.Actors %>">
-                    <input type="hidden" name="year" value="<%= movie.year %>">
-                    <input type="hidden" name="imDbRating" value="<%= movie.imDbRating %>">
-                    <input type="hidden" name="runtime" value="<%= movie.Runtime %>">
-                  </form>
+         
             </div>
         <%  }); %>
         </div>
+        <form action="/" method="get" >
+         <input type="hidden" value="10" style="display:none" name="pagination">
+         <input type="submit" value="Load More">
+        </form>
     </main>
 
     

@@ -22,7 +22,7 @@ CREATE TABLE  movies (
 metacritic_rate TEXT,
 theMovieDb_rate TEXT,
 rottenTomatoes_rate TEXT
-  );
+);
 
 
 
@@ -31,6 +31,7 @@ CREATE TABLE users (
     username VARCHAR(255),
     useremail CHAR(255),
     password CHAR(255)
+
     );
 
   -- add foreign key related to the user id
@@ -43,5 +44,7 @@ CREATE TABLE users_favorite_list (
 );
 
 ALTER TABLE users_favorite _list ADD CONSTRAINT FOREIGN KEY (user_id_fk)  REFERENCES  users(id);
+
+
 
 

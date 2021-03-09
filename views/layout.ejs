@@ -33,10 +33,11 @@
             <h1>The Movie Star</h1>
               <div class="search-container">
                   <!-- CHANGE THE ACTION & PUT METHOD -->
-                <form action="../pages/html/detail.html" id="search-form">
-                    <input type="search" placeholder="Search">
-                    <i class="fa fa-search"></i>
-                </form>
+                <form action="/search" id="search-form" method="GET">
+                    <input type="text" name="search" placeholder="Search">
+                    <i class="fa fa-search" onclick="this.form.submit"><input type="submit"class="fa fa-search" value="" >
+                </i>           
+                 </form>
             </div>
         </div>
     </header>
