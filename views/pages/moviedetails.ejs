@@ -13,7 +13,7 @@
             <h1><%= item.title %></h1>
             <h4><%= item.year %></h4>
             <!-- Convert to stars -->
-            <h4><%= item.metacritic_rate %></h4>
+            <h4><%= item.imdb_rate %></h4>
             <span class="minutes">Duration: <%= item.runtime%> Minutes</span>
             <br>
             <h3 class="type">Category: <%= item.genre %> </h3>
@@ -34,6 +34,9 @@
             </div>
             </div>
             
+            <script>
+              $("body").css("background-image", "url(<%= item.image %>)" ,"opacity","0.5")
+            </script>
             <%})  %>
 
 
