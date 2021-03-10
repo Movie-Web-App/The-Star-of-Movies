@@ -1,6 +1,16 @@
    <main>
-        <div class="signup-form">
-            <form action="/movies" class="signup" method="POST">
+        <div  class="signup-form">
+            <br>
+            <br>
+            <br>
+            <div id="div-buttons">
+                <button id="signup-button" class="active-button">Sign Up</button> 
+                <button id="login-button" class="unactive-button">Login</button>
+            </div>
+            <form action="/movies" class="signup" method="POST" id="signup-form">
+                <br>
+                <br>
+                <span id="title">Sign Up!</span>
                 <br>
                 <br>
                 <input type="text" name="username" id="username" placeholder="User Name">
@@ -13,8 +23,58 @@
                 <br>
                 <br>
                 <input type="submit" value="Sign Up!" id="submit-signup">
-                <p>have account? <a href="/login" class="login-redirect-link"><B> Login</B></a></p>
+                <br>
+                <br>
                 <br>
             </form>
-        </div>
+
+            <form action="/movies" class="signup" method="POST" id="login-form">
+                <br>
+                <br>
+                <span id="title">Login!</span>
+                <br>
+                <br>
+                <input type="email" name="username" id="username" placeholder="E-mail">
+                <br>
+                <br>
+                <input type="password" name="password" id="password" placeholder="Password">
+                <br>
+                <br>
+                <input type="submit" value="Login" id="submit-signup">
+                <br>
+                <br>
+                <br>
+            </form>
+
+
+    </div>
     </main>
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+        <script>
+            $('#login-form').hide();
+            
+            $('#signup-button').click(()=>{
+                $('#signup-form').show();
+                $('#login-form').hide();
+
+                $('#login-button').removeClass()
+                $('#signup-button').removeClass()
+                
+                $('#signup-button').addClass("active-button");
+                $('#login-button').addClass("unactive-button");
+
+            });
+            
+            $('#login-button').click(()=>{
+                $('#login-form').show();
+                $('#signup-form').hide();
+
+                $('#login-button').removeClass()
+                $('#signup-button').removeClass()
+
+                $('#login-button').addClass("active-button");
+                $('#signup-button').addClass("unactive-button");
+
+            });
+            
+        </script>
