@@ -34,8 +34,9 @@ server.get("/databaseinit", databaseinit);
 function signin(req,res) {
   res.render("pages/login")
 }
-function signup(req,res) {
-  res.render("pages/signup")
+
+function signup(req, res) {
+  res.render("pages/signup");
 }
 
 function contactUs (req,res){
@@ -87,7 +88,6 @@ function databaseinit(req, res) {
           .then((results) => {
             // console.log(results);
             if (results.rowCount == 0) {
-      
               let url2 = `https://imdb-api.com/en/API/Title/${key}/${item}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`;
               superagent.get(url2).then((results) => {
                 let result = results.body;
@@ -146,14 +146,13 @@ function Movie(moviesData) {
 }
 
 function capitalizeTheFirstLetterOfEachWord(words) {
-  var separateWord = words.toLowerCase().split(' ');
+  var separateWord = words.toLowerCase().split(" ");
   for (var i = 0; i < separateWord.length; i++) {
-     separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
-     separateWord[i].substring(1);
+    separateWord[i] =
+      separateWord[i].charAt(0).toUpperCase() + separateWord[i].substring(1);
   }
-  return separateWord.join(' ');
+  return separateWord.join(" ");
 }
-
 
 let pagination = 10;
 function home(req, res) {
@@ -167,67 +166,62 @@ function home(req, res) {
 }
 
 function searchHandler(req, res) {
-
-  let searchedMov=[]
-  const key = process.env.IMDB_KEY2;
-  let title =null
+  let searchedMov = [];
+  const key = process.env.IMDB_KEY3;
+  let title = null;
   if (req.query.search)
-  title= capitalizeTheFirstLetterOfEachWord(req.query.search);
-  else 
-  res.redirect("/")
-  let SQL = `SELECT * FROM movies WHERE title LIKE '%${title}%' ;`
+    title = capitalizeTheFirstLetterOfEachWord(req.query.search);
+  else res.redirect("/");
+  let SQL = `SELECT * FROM movies WHERE title LIKE '%${title}%' ;`;
 
-  client.query(SQL)
-  .then(data =>{
-   
-    if (data.rowCount==0){
-
-     let URL=`https://imdb-api.com/en/API/Search/${key}/${title}`  
-      superagent.get(URL).then((results) => {
-        results.body.results.map(item=>{
-        let url2 = `https://imdb-api.com/en/API/Title/${key}/${item.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`;
-              superagent.get(url2).then((results) => {
-                let result = results.body;
-                let actors = result.actorList.reduce((acc, cur) => {
-                  return (acc += cur.name + " , ");
-                }, "");
-                let SQL = `INSERT INTO movies(imdb_id,title,year,image,stars,runtime,genre,actors,plot,trailer,imDb_rate,metacritic_rate,theMovieDb_rate,rottenTomatoes_rate) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning * `;
-                let safeValues = [
-                  result.id,
-                  result.title,
-                  result.year,
-                  result.image,
-                  result.stars,
-                  result.runtimeMins,
-                  result.genres,
-                  actors,
-                  result.plot,
-                  result.trailer.linkEmbed,
-                  result.ratings.imDb,
-                  result.ratings.metacritic,
-                  result.ratings.theMovieDb,
-                  result.ratings.rottenTomatoes,
-                ];
-                client.query(SQL, safeValues).then((returnedData)=>{
-                  searchedMov.push(returnedData)
-                });
-              
+  client.query(SQL).then((data) => {
+    if (data.rowCount == 0) {
+      let URL = `https://imdb-api.com/en/API/Search/${key}/${title}`;
+      superagent
+        .get(URL)
+        .then((results) => {
+          results.body.results.map((item) => {
+            let url2 = `https://imdb-api.com/en/API/Title/${key}/${item.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`;
+            superagent.get(url2).then((results) => {
+              let result = results.body;
+              let actors = result.actorList.reduce((acc, cur) => {
+                return (acc += cur.name + " , ");
+              }, "");
+              let SQL = `INSERT INTO movies(imdb_id,title,year,image,stars,runtime,genre,actors,plot,trailer,imDb_rate,metacritic_rate,theMovieDb_rate,rottenTomatoes_rate) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning * `;
+              let safeValues = [
+                result.id,
+                result.title,
+                result.year,
+                result.image,
+                result.stars,
+                result.runtimeMins,
+                result.genres,
+                actors,
+                result.plot,
+                result.trailer.linkEmbed,
+                result.ratings.imDb,
+                result.ratings.metacritic,
+                result.ratings.theMovieDb,
+                result.ratings.rottenTomatoes,
+              ];
+              client.query(SQL, safeValues).then((returnedData) => {
+                searchedMov.push(returnedData);
               });
-            })    
-
-      }).then(()=>{
-        console.log(searchedMov);
-        res.render("pages/moviespage", { movies: searchedMov });
-      })
-      .catch((error)=>{
-        res.json(error)
-      });
-     }else {
-     // res.json(result)
-     res.render("pages/moviespage", { movies: data.rows });
-
-     }
-  }) 
+            });
+          });
+        })
+        .then(() => {
+          console.log(searchedMov);
+          res.render("pages/moviespage", { movies: searchedMov });
+        })
+        .catch((error) => {
+          res.json(error);
+        });
+    } else {
+      // res.json(result)
+      res.render("pages/moviespage", { movies: data.rows });
+    }
+  });
 }
 
 function detailHandler(req, res) {
@@ -237,7 +231,6 @@ function detailHandler(req, res) {
     res.render("pages/moviedetails", { movie: results.rows });
   });
 }
-
 
 // server.get("/FavoriteList/:id", (req, res) => {
 //   let id = req.query.id;
@@ -267,8 +260,19 @@ function detailHandler(req, res) {
 //     .catch(()=>{
 //               errorHandler('Error in getting data!!');
 //           })
-// })
+//
 
+server.get("/random", randomHandler);
+function randomHandler(req, res) {
+  let SQL = `SELECT * FROM movies ;`;
+  client.query(SQL).then((result) => {
+    res.render("pages/random", { random: result.rows[randomInt()] });
+    console.log(result.rows[randomInt()]);
+  });
+}
+function randomInt() {
+  return Math.floor(Math.random() * (250 - 0 + 1) + 0);
+}
 client.connect().then(() => {
   server.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
