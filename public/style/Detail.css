@@ -4,6 +4,7 @@
 	 margin: 0;
 }
 
+
  .link {
 	 display: block;
 	 text-align: center;
@@ -14,30 +15,24 @@
 
 .locandina{
 	text-align: center;
-    margin-left: 370px;
     margin-top: 55px;
     width: 400px;
 }
 
- .movie_card {
-	 position: relative;
-	 display: block;
-	 width: 1200px;
-	 height: fit-content;
-	 left: 55px;
-	 top: 25px;
-	 margin: 80px auto;
-	 overflow: hidden;
-	 border-radius: 10px;
-	 transition: all 0.4s;
-	 box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+.header-film{
+
+    text-align: center;
+    
+	/* transform: translateX(-57px); */
 }
+
+ 
 
 #favorite-button{
 	outline: none;
 	border: none;
 	color: black;
-	font-size: x-large;
+	font-size: xx-large;
 	background: none;
 	float: right;
 }
@@ -53,11 +48,18 @@
 	 background-blend-mode: multiply;
 	 z-index: 2;
 	 border-radius: 10px;
+
+
+	 
 }
  .movie_card .info_section .movie_header {
 	 position: relative;
 	 padding: 25px;
 	 height: 40%;
+	 display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
  .movie_card .info_section .movie_header h1 {
 	 color: black;
@@ -77,6 +79,7 @@
     font-weight: 400;
     text-align: center;
     margin-left: 320px;
+	font-size: x-large;
 }
 
 .movie_card .info_section .movie_header h5 {
@@ -84,6 +87,7 @@
     font-weight: 300;
     text-align: center;
     margin-left: 320px;
+	font-size: medium;
 }
 
  .movie_card .info_section .movie_header .minutes {
@@ -101,23 +105,26 @@
     color: black;
     text-align: center;
     margin-left: 485px;
+	font-size: x-large;
 }
  .movie_card .info_section .movie_header .locandina {
-	 position: relative;
-	 float: left;
-	 margin-right: 20px;
+	
 	 height: 400px;
    width: 300px;
 	 box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
 }
  .movie_card .info_section .movie_desc {
-	width: 125%;
-    position: absolute;
-    top: 955px;
+	/* width: 125%;
+	margin-top: 805px;
     font-size: larger;
     text-align: center;
     margin-left: 75px;
-    color: black;
+    color: black; */
+}
+
+.movie_desc p{
+	font-size: larger;
+
 }
 
 .actors{
@@ -139,7 +146,7 @@
 }
 
 .text{
-  display: inline-block;
+  /* display: inline-block;
   overflow: hidden;
   /* margin-left: 320px; */
   color: black;
@@ -181,10 +188,12 @@
 
 p
 {
-	margin-top: -550px;
+
 	color: black;
 }
-
+.year-released{
+	color: black;
+}
 
 
 
@@ -200,26 +209,25 @@ p
 
 
 .rating {
-	width: 250px;
+	/* width: 250px; */
 	margin: 0 auto 1em;
 	font-size: 45px;
 	overflow:hidden;
 }
 .rating input {
-float: right;
+/* float: right;
 opacity: 0;
-position: absolute;
+position: absolute; */
 }
 .rating a,
 .rating label {
-	float:right;
+	/* float:right; */
 	color: rgb(97, 96, 96);
 	text-decoration: none;
-	-webkit-transition: color .4s;
-	-moz-transition: color .4s;
-	-o-transition: color .4s;
+
 	transition: color .4s;
 }
+
 .rating label:hover ~ label,
 .rating input:focus ~ label,
 .rating label:hover,
@@ -230,55 +238,86 @@ position: absolute;
 	color: orange;
 	cursor: pointer;
 }
-.rating2 {
+ .rating2 {
 	direction: rtl;
-	margin-top: 300px;
-	margin-left: 420px;
-}
-.rating2 a {
-	float:none
+
 }
 
+/* 
  @media screen and (min-width: 768px) {
-	 .movie_header {
-		 width: 65%;
-	}
-	 .movie_desc {
-		 width: 100%;
-	}
-	 .info_section {
-		 background: linear-gradient(to right, #e5e6e6a6 50%, transparent 100%);
-	}
-	 .blur_back {
-		 width: 80%;
-		 background-position: -100% 10% !important;
-	}
+	
 }
  @media screen and (max-width: 768px) {
-	 .movie_card {
-		 width: 95%;
-		 margin: 70px auto;
-		 min-height: 350px;
-		 height: auto;
-	}
-	 .blur_back {
-		 width: 100%;
-		 background-position: 50% 50% !important;
-	}
-	 .movie_header {
-		 width: 100%;
-		 margin-top: 85px;
-	}
-	 .movie_desc {
-		 width: 100%;
-	}
-	 .info_section {
-		 background: linear-gradient(to top, #e5e6e6 50%, transparent 100%);
-		 display: inline-grid;
-	}
+	
+} */
+
+.movie_card {
+	position: relative;
+	display: block;
+
+	border-radius: 10px;
+	transition: all 0.4s;
+	box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+	width: 85%;
+	height: auto;
+	background: linear-gradient(75deg
+	, rgba(255,255,255,0.4), rgba(255,255,255,0.4));
+	background: linear-gradient(to top, #e5e6e6 50%, transparent 100%);
+
+	margin: auto;
 }
- .bright_back {
-	 background: url("https://captaindroid.com/wp-content/uploads/2019/02/530968-cool-theater-backgrounds-1920x1080-for-xiaomi.jpg");
+/* 
+.movie_card {
+	background: linear-gradient(to top, #e5e6e6 50%, transparent 100%);
+	display: inline-grid;
+} */
+
+.blur_back {
+	width: 100%;
+	background-position: 50% 50% !important;
+}
+.movie_header {
+	width: 100%;
+	margin-top:100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.movie_desc {
+	width: 100%;
+}
+
+.movie_desc {
+	width: 100%;
+}
+
+.blur_back {
+	width: 80%;
+	background-position: -100% 10% !important;
+}
+.bright_back {
+	background: url("https://captaindroid.com/wp-content/uploads/2019/02/530968-cool-theater-backgrounds-1920x1080-for-xiaomi.jpg");
+}
+
+
+.loved-it{
+	margin-top: 25px;
+}
+
+.fa-heart:hover{
+	color: red;
+
+}
+
+.plot{
+	margin-top: 25px;
+	width: 60%;
+	font-size: 13px;
+	font-weight: 500;
+}
+.plot-prefix{
+	font-size: 16px;
 }
  /* .tomb_back {
 	 background: url("https://fsmedia.imgix.net/cd/c9/5e/ba/4817/4d9a/93f0/c776ec32ecbc/lara-crofts-neck-looks-unnatural-in-the-new-poster-for-tomb-raider.png");
