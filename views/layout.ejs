@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../../style/layout.css">
     <link rel="stylesheet" href="../../style/module.css">
     <link rel="stylesheet" href="../../style/Detail.css">
+    <link rel="stylesheet" href="../../style/aboutUs.css">
+
     <link rel="icon" href="../../images/moviees-removebg-preview.png">
     <title>The Star of Movies</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -41,8 +43,8 @@
         <script>
             if (window.localStorage.getItem('user_token') == null)
                 $('#nav').append(` <a href="/" class="tooltip"><i class="fa fa-home"></i><span class="tooltiptext">Home</span></a>
-        <a href="/signup" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">signup</span></a>
-        <a href="/signin" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">signin</span></a>
+        <a href="/signup" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">Signup/Login</span></a>
+        
         <a href="/moviespage" class="tooltip"><i class="fas fa-film"></i><span class="tooltiptext">Movies</span></a>
         <a href="/aboutUS" class="tooltip"><i class="fa fa-address-card"></i><span class="tooltiptext">About
             Us</span></a>
@@ -67,6 +69,7 @@
 
 
     </div>
+
     <header>
         <div class="header">
             <img src="../../images/moviees-removebg-preview.png" alt="logo" />
@@ -81,7 +84,7 @@
                             value="">
                     </i>
                 </form>
-                <form action="">
+                <form action="/random" method="GET">
                     <button type="submit" id="dice-button">
                         <i class="fas fa-dice" style="font-size: x-large;"></i>
                 </form>

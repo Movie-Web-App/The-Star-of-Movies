@@ -10,113 +10,27 @@
         <% } %>
 
 
+            <div class="index-wrapper">
+                <h2 class="hero-headline typography-hero-headline" style="text-align: center;">Unlimited Movies from
+                    Anywhere</h2>
 
-
-
-            <% if ( typeof movies !='undefined' ) { %>
-
-                <div class="container-for-films">
-                    <% movies.forEach(movie=> { %>
-                        <div class="favorite-list-div">
-                            <img src="<%= movie.image %>" alt="poster">
-                            <h2>
-                                <%= movie.title %>
-                            </h2>
-                            <h4>
-                                <%= movie.year %>
-                            </h4>
-
-                            <% if (+movie.imdb_rate/2===5) { %>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <% } %>
-                                    <% if (+movie.imdb_rate/2 < 5 && +movie.imdb_rate/2>= 4.5){ %>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span><i class="fas fa-star-half"></i></span>
-                                        <% } %>
-                                            <% if (+movie.imdb_rate/2 < 4.5 && +movie.imdb_rate/2>= 4) { %>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <% } %>
-                                                    <% if (+movie.imdb_rate/2 < 4 && +movie.imdb_rate/2>= 3.5) { %>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span><i class="fas fa-star-half"></i></span>
-                                                        <% } %>
-                                                            <% if (movie.imdb_rate/2 < 3.5 && movie.imdb_rate/2>= 3) {
-                                                                %>
-                                                                <span class="fa fa-star checked"></span>
-                                                                <span class="fa fa-star checked"></span>
-                                                                <span class="fa fa-star checked"></span>
-                                                                <% } %>
-                                                                    <% if (movie.imdb_rate/2 < 3 && movie.imdb_rate/2>=
-                                                                        2.5) { %>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span class="fa fa-star checked"></span>
-                                                                        <span><i class="fas fa-star-half"></i></span>
-                                                                        <% } %>
-                                                                            <% if (movie.imdb_rate/2 < 2.5 &&
-                                                                                movie.imdb_rate/2>= 2) { %>
-                                                                                <span class="fa fa-star checked"></span>
-                                                                                <span class="fa fa-star checked"></span>
-                                                                                <% } %>
-                                                                                    <% if (movie.imdb_rate/2 < 2 &&
-                                                                                        movie.imdb_rate/2>= 1.5) { %>
-                                                                                        <span
-                                                                                            class="fa fa-star checked"></span>
-                                                                                        <span><i
-                                                                                                class="fas fa-star-half"></i></span>
-                                                                                        <% } %>
-                                                                                            <% if (movie.imdb_rate/2 <
-                                                                                                1.5 &&
-                                                                                                movie.imdb_rate/2>= 1) {
-                                                                                                %>
-                                                                                                <span
-                                                                                                    class="fa fa-star checked"></span>
-                                                                                                <% } %>
-                                                                                                    <% if
-                                                                                                        (movie.imdb_rate/2
-                                                                                                        < 1) { %>
-                                                                                                        <span><i
-                                                                                                                class="fas fa-star-half"></i></span>
-                                                                                                        <% } %>
-                                                                                                            <div
-                                                                                                                class="form-buttons">
-                                                                                                                <form
-                                                                                                                    action="/moviedetails/<%= movie.id %>"
-                                                                                                                    method="GET">
-                                                                                                                    <br>
-                                                                                                                    <a href="/details?id=<%= movie.id %>"
-                                                                                                                        id="info"
-                                                                                                                        class="tooltip"><i
-                                                                                                                            class="fas fa-info"></i>
-                                                                                                                        <span
-                                                                                                                            class="tooltiptext">More
-                                                                                                                            Details</span></a>
-                                                                                                                </form>
-                                                                                                                <br>
-                                                                                                                <br>
-                                                                                                            </div>
+                <div class="search-div">
+                    <!-- CHANGE THE ACTION & PUT METHOD -->
+                    <form action="/search" method="GET">
+                        <br>
+                        <br>
+                        <div class="input-container">
+                            <input type="text" name="search" placeholder="Search" class="index-main-search">
+                            <i class="Search-class" onclick="this.form.submit"></i>
 
                         </div>
-                        <% }); %>
+                    </form>
                 </div>
-                <form action="/" method="get" id="load-form">
-                    <input type="hidden" value="10" style="display:none" name="pagination">
-                    <input type="submit" value="Load More" id="testbutton">
-                    <br>
-                    <br>
-                    <br>
-                </form>
+            </div>
+            <script>
+                $('#search-form').css("display", "none")
+                $('body').css("background-image", "url(https://wallpapercave.com/wp/VmN49xl.jpg)")
+            </script>
 
-                <% } %>
+
 </main>

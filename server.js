@@ -1,5 +1,5 @@
 "use strict";
-
+let pagination = 10;
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
@@ -17,6 +17,8 @@ server.use(express.urlencoded({ extended: true }));
 const secret = process.env.secret;
 const saltRounds = 10;
 
+server.use(express.urlencoded({ extended: true }));
+
 const override = require("method-override");
 // const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -29,17 +31,23 @@ server.use(express.static("./public"));
 server.get("/", home);
 server.get("/signup", signup);
 server.get("/signin", signin);
+server.get("/contactUs", contactUs);
+server.post("/feedback", feedbackHandler);
+server.get("/feedback", reviewskHandler);
 server.get("/details", detailHandler);
 server.get("/search", searchHandler);
 server.get("/databaseinit", databaseinit);
 server.get("/signup", signup);
 server.get("/signin", signin);
 server.get("/logout", logout);
+server.get("/aboutUs", aboutus)
+server.get("/moviespage", moviespage)
+server.get('/FavoriteList', FavoriteList)
+
+
 
 server.post("/signup", signupHandler);
 server.post("/signin", signinHandler);
-
-server.get('/FavoriteList', FavoriteList)
 
 server.post('/FavoriteList/:id', FavoriteListHandler)
 server.put('/FavoriteList/:id', FavoriteListHandler)
@@ -66,6 +74,47 @@ function FavoriteList(req, res) {
 }
 
 
+function aboutus(req, res) {
+  res.render("pages/aboutUs")
+}
+
+function moviespage(req, res) {
+  if (req.query.pagination) {
+    pagination += +req.query.pagination;
+  }
+  let SQL = `SELECT * FROM movies limit ${pagination}`;
+  client.query(SQL).then((results) => {
+    res.render("pages/moviespage", { movies: results.rows });
+  });
+}
+
+
+
+
+function feedbackHandler(req, res) {
+  console.log(req.body);
+  let SQL = `INSERT INTO userfeedback (username ,feedback) VALUES ($1 , $2) RETURNING id;`
+  let saveValues = [req.body.username, req.body.feedback];
+
+  client.query(SQL, saveValues)
+    .then(result => {
+      console.log("inserted into db");
+
+    })
+}
+
+function reviewskHandler(req, res) {
+  let SQL1 = `SELECT * FROM userfeedback;`
+
+  client.query(SQL1)
+    .then(result => {
+
+      console.log(result);
+    })
+
+}
+
+
 var movies_ids = [];
 let flag = true;
 
@@ -87,29 +136,30 @@ function databaseinit(req, res) {
           .then((results) => {
             // console.log(results);
             if (results.rowCount == 0) {
-
               let url2 = `https://imdb-api.com/en/API/Title/${key}/${item}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`;
               superagent.get(url2).then((results) => {
                 let result = results.body;
-                let actors = result.actorList.reduce((acc, cur) => {
-                  return (acc += cur.name + " , ");
-                }, "");
+                if (result.actorList) {
+                  let actors = result.actorList.reduce((acc, cur) => {
+                    return (acc += cur.name + " , ");
+                  }, "");
+                }
                 let SQL = `INSERT INTO movies(imdb_id,title,year,image,stars,runtime,genre,actors,plot,trailer,imDb_rate,metacritic_rate,theMovieDb_rate,rottenTomatoes_rate) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) `;
                 let safeValues = [
                   result.id,
-                  result.title,
-                  result.year,
+                  result.title ? result.title : "",
+                  result.year ? result.year : "",
                   result.image,
-                  result.stars,
-                  result.runtimeMins,
-                  result.genres,
-                  actors,
-                  result.plot,
-                  result.trailer.linkEmbed,
-                  result.ratings.imDb,
-                  result.ratings.metacritic,
-                  result.ratings.theMovieDb,
-                  result.ratings.rottenTomatoes,
+                  result.stars ? result.stars : "",
+                  result.runtimeMins ? result.runtimeMins : "",
+                  result.genres ? result.genres : "",
+                  actors ? actors : "",
+                  result.plot ? result.plot : "",
+                  result.trailer.linkEmbed ? result.trailer : "",
+                  result.ratings.imDb ? result.ratings : "",
+                  result.ratings.metacritic ? result.ratings : "",
+                  result.ratings.theMovieDb ? result.ratings : "",
+                  result.ratings.rottenTomatoes ? result.ratings : "",
                 ];
                 client.query(SQL, safeValues);
                 // .then((results) => {
@@ -146,29 +196,21 @@ function Movie(moviesData) {
 }
 
 function capitalizeTheFirstLetterOfEachWord(words) {
-  var separateWord = words.toLowerCase().split(' ');
+  var separateWord = words.toLowerCase().split(" ");
   for (var i = 0; i < separateWord.length; i++) {
     separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
       separateWord[i].substring(1);
   }
-  return separateWord.join(' ');
+  return separateWord.join(" ");
 }
 
 
-let pagination = 10;
 
 function home(req, res) {
-  if (req.query.pagination) {
-    pagination += +req.query.pagination;
-  }
-  let SQL = `SELECT * FROM movies limit ${pagination}`;
-  client.query(SQL).then((results) => {
-    res.render("pages/index", { movies: results.rows });
-  });
+  res.render("pages/index")
 }
 
 function searchHandler(req, res) {
-
   let searchedMov = []
   const key = process.env.IMDB_KEY2;
   let title = null
@@ -189,25 +231,27 @@ function searchHandler(req, res) {
             let url2 = `https://imdb-api.com/en/API/Title/${key}/${item.id}/FullActor,FullCast,Posters,Images,Trailer,Ratings,Wikipedia`;
             superagent.get(url2).then((results) => {
               let result = results.body;
-              let actors = result.actorList.reduce((acc, cur) => {
-                return (acc += cur.name + " , ");
-              }, "");
+              if (result.actorList) {
+                let actors = result.actorList.reduce((acc, cur) => {
+                  return (acc += cur.name + " , ");
+                }, "");
+              }
               let SQL = `INSERT INTO movies(imdb_id,title,year,image,stars,runtime,genre,actors,plot,trailer,imDb_rate,metacritic_rate,theMovieDb_rate,rottenTomatoes_rate) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning * `;
               let safeValues = [
                 result.id,
-                result.title,
-                result.year,
+                result.title ? result.title : "",
+                result.year ? result.year : "",
                 result.image,
-                result.stars,
-                result.runtimeMins,
-                result.genres,
-                actors,
-                result.plot,
-                result.trailer.linkEmbed,
-                result.ratings.imDb,
-                result.ratings.metacritic,
-                result.ratings.theMovieDb,
-                result.ratings.rottenTomatoes,
+                result.stars ? result.stars : "",
+                result.runtimeMins ? result.runtimeMins : "",
+                result.genres ? result.genres : "",
+                actors ? actors : "",
+                result.plot ? result.plot : "",
+                result.trailer.linkEmbed ? result.trailer : "",
+                result.ratings.imDb ? result.ratings : "",
+                result.ratings.metacritic ? result.ratings : "",
+                result.ratings.theMovieDb ? result.ratings : "",
+                result.ratings.rottenTomatoes ? result.ratings : "",
               ];
               client.query(SQL, safeValues).then((returnedData) => {
                 searchedMov.push(returnedData)
@@ -312,14 +356,16 @@ function signupHandler(req, res) {
 
 function signinHandler(req, res, next) {
 
-  let { userEmail, password } = req.body
+  let { email, password } = req.body
+  console.log(req.body)
   let checkForUserExistanceQuery = `select * from users where useremail=$1;`
   // select * from users where useremail='anas@anas.anas' and password= '$2b$10$DkJWfgTbxMCzgjQPQXpiYeQNeiC3XPsLMb4I.SHMtR3YcwMo.cSCq'  
-  let safevals = [userEmail]
-
+  let safevals = [email]
+  console.log(checkForUserExistanceQuery)
   client.query(checkForUserExistanceQuery, safevals).then((result) => {
-
+    console.log(result.rows)
     if (result.rowCount == 1) {
+      console.log(result.rowCount)
       let userPwd = result.rows[0].password;
       let userIsExists = authinticate_user(password, userPwd)
 
@@ -337,7 +383,7 @@ function signinHandler(req, res, next) {
       // res.render("pages/index", { saveTokenLocally: localStorage.setItem('user_token', token) })
     }
     else {
-      res.render("pages/login", { error: "Wrong E-mail or Password" })
+      res.render("pages/signup", { error: "Wrong E-mail or Password" })
     }
   })
 }
@@ -374,8 +420,23 @@ function FavoriteListHandler(req, res) {
 //     .catch(()=>{
 //               errorHandler('Error in getting data!!');
 //           })
-// })
+//
 
+server.get("/random", randomHandler);
+function randomHandler(req, res) {
+  let SQL = `SELECT * FROM movies ;`;
+  client.query(SQL).then((result) => {
+    res.render("pages/random", { random: result.rows[randomInt()] });
+    console.log(result.rows[randomInt()]);
+  });
+}
+
+function contactUs(req, res) {
+  res.render("pages/ContactUs")
+}
+function randomInt() {
+  return Math.floor(Math.random() * (250 - 0 + 1) + 0);
+}
 client.connect().then(() => {
   server.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
