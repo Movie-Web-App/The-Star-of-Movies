@@ -58,11 +58,11 @@ function feedbackHandler (req, res){
 
 function reviewskHandler (req,res){
      let SQL1 = `SELECT * FROM userfeedback;`
-
      client.query(SQL1)
      .then(result =>{
+       console.log(result.rows);
 
-        console.log(result);
+      res.render("pages/ContactUs", { users: result.rows });
      })
 
 }
