@@ -1,50 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="../../style/base.css">
     <link rel="stylesheet" href="../../style/layout.css">
     <link rel="stylesheet" href="../../style/module.css">
-
     <link rel="stylesheet" href="../../style/Detail.css">
     <link rel="icon" href="../../images/moviees-removebg-preview.png">
     <title>The Star of Movies</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous"></script>
 
 
 </head>
+
 <body>
-    <div class="sidenav">
-        <a href="/"><i class="fa fa-home"></i><p class="text">Home</p></a> 
+    <div id="nav" class="sidenav">
+
         <!-- THE DIRECT INSIDE SERVER.JS -->
-        <a href="/login"><i class="fa fa-user"></i><p class="text">Account</p></a> 
-        <a href="../pages/FavoriteList.ejs"><i class="far fa-heart"></i><p class="text">Favorite List</p></a> 
-        <a href="/moviespage"><i class="fas fa-film"></i><p class="text">Movies</p></a> 
-        <a href="../pages/AboutUS.ejs"><i class="fa fa-address-card"></i><p class="text">About Us</p></a>
-        <a href="../pages/ContactUs.ejs"><i class="fa fa-envelope"></i><p class="text">Contact Us</p></a> 
-        <a href="../pages/settings.ejs"><i class="fas fa-cogs"></i><p class="text">Settings</p></a> 
+        <!-- <script>
+            var token = window.localStorage.getItem('user_token');
+
+                if (token) {
+                $.ajaxSetup({
+                    headers: {
+                    'x-access-token': token
+                    }
+                });
+                }
+        </script> -->
+
+
+        <script>
+            if (window.localStorage.getItem('user_token') == null)
+                $('#nav').append(` <a href="/" class="tooltip"><i class="fa fa-home"></i><span class="tooltiptext">Home</span></a>
+        <a href="/signup" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">signup</span></a>
+        <a href="/signin" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">signin</span></a>
+        <a href="/moviespage" class="tooltip"><i class="fas fa-film"></i><span class="tooltiptext">Movies</span></a>
+        <a href="/aboutUS" class="tooltip"><i class="fa fa-address-card"></i><span class="tooltiptext">About
+            Us</span></a>
+    <a href="/contactUs" class="tooltip"><i class="fa fa-envelope"></i><span class="tooltiptext">Contact
+            Us</span></a>
+        `)
+            else {
+                $('#nav').append(` <a href="/" class="tooltip"><i class="fa fa-home"></i><span class="tooltiptext">Home</span></a>
+        <a href="/logout" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">Logout</span></a>
+        <a href="/moviespage" class="tooltip"><i class="fas fa-film"></i><span class="tooltiptext">Movies</span></a>
+        <a href="/FavoriteList" class="tooltip"><i class="far fa-heart"></i><span
+            class="tooltiptext">Favorite List</span></a>
+        <a href="/aboutUs" class="tooltip"><i class="fa fa-address-card"></i><span class="tooltiptext">About
+            Us</span></a>
+        <a href="/contactUs" class="tooltip"><i class="fa fa-envelope"></i><span class="tooltiptext">Contact
+            Us</span></a>
+            <a href="/settings" class="tooltip"><i class="fas fa-cogs"></i><span
+                class="tooltiptext">Settings</span></a>`)
+            }
+        </script>
+
+
+
     </div>
     <header>
         <div class="header">
             <img src="../../images/moviees-removebg-preview.png" alt="logo" />
             <h1>The Movie Star</h1>
-              <div class="search-container">
-                  <!-- CHANGE THE ACTION & PUT METHOD -->
+            <div class="search-container">
+                <!-- CHANGE THE ACTION & PUT METHOD -->
                 <form action="/search" id="search-form" method="GET">
+                    <br>
+                    <br>
                     <input type="text" name="search" placeholder="Search">
-                    <i class="fa fa-search" onclick="this.form.submit"><input type="submit"class="fa fa-search" value="" >
-                </i>           
-                 </form>
+                    <i class="fa fa-search" onclick="this.form.submit"><input type="submit" class="fa fa-search"
+                            value="">
+                    </i>
+                </form>
+                <form action="">
+                    <button type="submit" id="dice-button">
+                        <i class="fas fa-dice" style="font-size: x-large;"></i>
+                </form>
             </div>
         </div>
     </header>
-    <%- body %> 
+    <%- body %>
 </body>
 
 </html>
-
-

@@ -3,13 +3,7 @@
 	 box-sizing: border-box;
 	 margin: 0;
 }
- html, body {
-	 margin: 0;
-	 background: white;
-	 font-family: 'Montserrat', helvetica, arial, sans-serif;
-	 font-size: 14px;
-	 font-weight: 400;
-}
+
  .link {
 	 display: block;
 	 text-align: center;
@@ -17,26 +11,45 @@
 	 text-decoration: none;
 	 padding: 10px;
 }
+
+.locandina{
+	text-align: center;
+    margin-left: 370px;
+    margin-top: 55px;
+    width: 400px;
+}
+
  .movie_card {
 	 position: relative;
 	 display: block;
-	 width: 1500px;
-	 height: 1000px;
+	 width: 1200px;
+	 height: fit-content;
+	 left: 55px;
+	 top: 25px;
 	 margin: 80px auto;
 	 overflow: hidden;
 	 border-radius: 10px;
 	 transition: all 0.4s;
 	 box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
 }
- .movie_card:hover {
-	 transform: scale(1.02);
-	 box-shadow: 0px 0px 80px -25px rgba(0, 0, 0, 0.5);
-	 transition: all 0.4s;
+
+#favorite-button{
+	outline: none;
+	border: none;
+	color: black;
+	font-size: x-large;
+	background: none;
+	float: right;
 }
+
+#favorite-button:hover{
+	cursor: pointer;
+}
+ 
  .movie_card .info_section {
 	 position: relative;
 	 width: 100%;
-	 height: 100%;
+	 height: fit-content;
 	 background-blend-mode: multiply;
 	 z-index: 2;
 	 border-radius: 10px;
@@ -49,23 +62,45 @@
  .movie_card .info_section .movie_header h1 {
 	 color: black;
 	 font-weight: 400;
+	 text-align: center;
+    margin-left: 325px;
 }
  .movie_card .info_section .movie_header h4 {
-	 color: #555;
-	 font-weight: 400;
+	color: black;
+    font-weight: 400;
+    text-align: center;
+    margin-left: 320px;
 }
+
+.movie_card .info_section .movie_header h3 {
+	color: black;
+    font-weight: 400;
+    text-align: center;
+    margin-left: 320px;
+}
+
+.movie_card .info_section .movie_header h5 {
+	color: black;
+    font-weight: 300;
+    text-align: center;
+    margin-left: 320px;
+}
+
  .movie_card .info_section .movie_header .minutes {
-	 display: inline-block;
-	 margin-top: 15px;
-	 color: #555;
-	 padding: 5px;
-	 border-radius: 5px;
-	 border: 1px solid rgba(0, 0, 0, 0.05);
+	display: inline-block;
+    margin-top: 15px;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-left: 445px;
 }
  .movie_card .info_section .movie_header .type {
-	 display: inline-block;
-	 color: #959595;
-	 margin-left: 10px;
+	display: inline-block;
+    color: black;
+    text-align: center;
+    margin-left: 485px;
 }
  .movie_card .info_section .movie_header .locandina {
 	 position: relative;
@@ -76,12 +111,40 @@
 	 box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
 }
  .movie_card .info_section .movie_desc {
-	 padding: 25px;
-	
+	width: 125%;
+    position: absolute;
+    top: 955px;
+    font-size: larger;
+    text-align: center;
+    margin-left: 75px;
+    color: black;
 }
+
+.actors{
+	position: absolute;
+    left: 350px;
+    top: 160px;
+}
+
+.movie_desc{
+	position: absolute;
+    top: 340px;
+    left: 2px;
+	margin-top: 15px;
+}
+
  .movie_card .info_section .movie_desc .text {
-	 color: #545454;
+	 color: black;
+	 margin-bottom: -5px;
 }
+
+.text{
+  display: inline-block;
+  overflow: hidden;
+  /* margin-left: 320px; */
+  color: black;
+}
+
  .movie_card .info_section .movie_social {
 	 height: 10%;
 	 padding-left: 15px;
@@ -118,15 +181,62 @@
 
 p
 {
-	margin-top: -250px;
+	margin-top: -550px;
+	color: black;
 }
+
+
+
 
 .video-div
 {
 	display: block;
     margin: 0 auto;  
 	margin-top: 100px;
-    margin-left: 25%;
+    margin-left: 22%;
+	margin-bottom: 50px;
+}
+
+
+
+.rating {
+	width: 250px;
+	margin: 0 auto 1em;
+	font-size: 45px;
+	overflow:hidden;
+}
+.rating input {
+float: right;
+opacity: 0;
+position: absolute;
+}
+.rating a,
+.rating label {
+	float:right;
+	color: rgb(97, 96, 96);
+	text-decoration: none;
+	-webkit-transition: color .4s;
+	-moz-transition: color .4s;
+	-o-transition: color .4s;
+	transition: color .4s;
+}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+.rating a:hover,
+.rating a:hover ~ a,
+.rating a:focus,
+.rating a:focus ~ a		{
+	color: orange;
+	cursor: pointer;
+}
+.rating2 {
+	direction: rtl;
+	margin-top: 300px;
+	margin-left: 420px;
+}
+.rating2 a {
+	float:none
 }
 
  @media screen and (min-width: 768px) {
@@ -134,10 +244,10 @@ p
 		 width: 65%;
 	}
 	 .movie_desc {
-		 width: 50%;
+		 width: 100%;
 	}
 	 .info_section {
-		 background: linear-gradient(to right, #e5e6e6 50%, transparent 100%);
+		 background: linear-gradient(to right, #e5e6e6a6 50%, transparent 100%);
 	}
 	 .blur_back {
 		 width: 80%;

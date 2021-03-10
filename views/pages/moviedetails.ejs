@@ -3,26 +3,49 @@
 
   <% movie.forEach(item=>{ %>
   
-
-      <div class="movie_card" id="bright">
-        <div class="info_section">
-          <div class="movie_header">
+    <div class="movie_card" id="bright">
+      <div class="info_section">
+        <div class="movie_header">
+            <form action="/FavoriteList/id=<% item.imdb_id %> " method="GET">
+              <button type="submit" id="favorite-button" class="tooltip"><i class="far fa-heart"></i><span class="tooltiptext">Add to Favorite List</span></button>
+            </form>
             <img class="locandina" src=<%= item.image %> >
+            <br>
             <h1><%= item.title %></h1>
-            <h4><%= item.year %></h4>
-            <span class="minutes"><%= item.runtime%></span>
-            <p class="type"><%= item.genre %> </p>
-          </div>
-          <div class="movie_desc">
-            <p class="text">
-              <%= item.plot %>
-            </p>
-          </div>
-          <div class="video-div">
-            <iframe width="727" height="409" src="<%= item.trailer%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <br>
+            <h3 class="type"><b>Category</b></h3>
+            <h3><%= item.genre %></h3>  
+            <br>
+            <span class="minutes"><b>Duration: </b>  <%= item.runtime%> Minutes</span>
+            <br>
+            <br>
+            <h4><B>Year Released: </B><%= item.year %></h4>
+            <br>
+            <h3> &bigstar;&bigstar; <b>Ratings</b>  &bigstar;&bigstar;</h3>
+            <h5><B>IMDB Rating: </B><%= item.imdb_rate %>/10</h5>
+            <h5><B>Metacritic Rating: </B><%= item.metacritic_rate %>/100</h5>
+            <div class="movie_desc">
+              <p class="text"><b>Description: </b>  <%= item.plot %> </p>
+              <br>
+              <br>
             </div>
             </div>
+            <div class="rating rating2">
+              <a href="#5" title="Give 5 stars">★</a>
+              <a href="#4" title="Give 4 stars">★</a>
+              <a href="#3" title="Give 3 stars">★</a>
+              <a href="#2" title="Give 2 stars">★</a>
+              <a href="#1" title="Give 1 star">★</a>
+              <br>
+              <br>
+          </div>
+      </div>
+    </div>
+    <div class="video-div">
+      <iframe width="860" height="409" src="<%= item.trailer%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
             <%})  %>
+
 
 
 
