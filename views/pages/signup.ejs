@@ -1,52 +1,60 @@
    <main>
-        <div  class="signup-form">
-            <br>
-            <br>
-            <br>
+        <!-- <div  class="signup-form"> -->
+            <div class="login-box">
+            
             <div id="div-buttons">
                 <button id="signup-button" class="active-button">Sign Up</button> 
                 <button id="login-button" class="unactive-button">Login</button>
             </div>
-            <form action="/movies" class="signup" method="POST" id="signup-form">
-                <br>
+               
+            <form action="/movies" method="POST" id="signup-form">
                 <br>
                 <span id="title">Sign Up!</span>
                 <br>
                 <br>
-                <input type="text" name="username" id="username" placeholder="User Name">
-                <br>
-                <br>
-                <input type="email" name="email" id="email" placeholder="E-mail">
-                <br>
-                <br>
-                <input type="password" name="password" id="password" placeholder="Password">
-                <br>
-                <br>
-                <input type="submit" value="Sign Up!" id="submit-signup">
-                <br>
-                <br>
-                <br>
-            </form>
-
-            <form action="/movies" class="signup" method="POST" id="login-form">
-                <br>
-                <br>
-                <span id="title">Login!</span>
-                <br>
-                <br>
-                <input type="email" name="username" id="username" placeholder="E-mail">
-                <br>
-                <br>
-                <input type="password" name="password" id="password" placeholder="Password">
-                <br>
-                <br>
-                <input type="submit" value="Login" id="submit-signup">
-                <br>
-                <br>
-                <br>
-            </form>
-
-
+                  <div class="user-box">
+                    <input type="text" name="username" required="">
+                    <label>User Name</label>
+                  </div>
+                  <div class="user-box">
+                    <input type="email" name="email" required="">
+                    <label>E-mail</label>
+                  </div>
+                  <div class="user-box">
+                    <input type="password" name="password" required="">
+                    <label>Password</label>
+                  </div>
+                  <a   onclick="$('#signup-form').submit()">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span> Sign Up!</a>
+                  <button style="display: none;"></button>
+                </form>
+               
+                <form action="/movies" class="signup" method="POST" id="login-form">
+                    <br>
+                  <span id="title">Log in!</span>
+                  <br>
+                  <br>
+                    <div class="user-box">
+                      <input type="email" name="username" required="" value="">
+                      <label>E-mail</label>
+                    </div>
+                    <div class="user-box">
+                      <input type="password" name="password" required="">
+                      <label>Password</label>
+                    </div>
+                    <a   onclick="$('#login-form').submit()">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span> Sign Up!</a>
+                      <button style="display: none;"></button>
+                    </form>
+              </div>
+            
+            </div>
     </div>
     </main>
         <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->

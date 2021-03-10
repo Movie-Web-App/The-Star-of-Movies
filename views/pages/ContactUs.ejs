@@ -1,35 +1,49 @@
 <main>
-    <div class="signup-form">
-    
-        <form action="/feedback" class="signup" method="POST">
-            <br>
-            <br>
-            <span id="title">Contact Us</span>
-            <br>
-            <br>
-            <span>We Would Like To Hear From You</span>
-            <br>
-            <br>
-            <input type="text" name="username" id="username" placeholder="Full Name">
-            <br>
-            <br>
-            <input type="text" name="feedback" id="feedback" placeholder="Message">
-            <br>
-            <br>
-            <input type="submit"  id="submit-signup">
-            <br>
-            <br>
-            <br>
+    <div class="login-box">
+        <h2>Contact Us</h2>
+        <h3>Email us and keep upto date with our latest news</h3>    
+                <form action="/feedback" method="POST" id="feedback">
+          <div class="user-box">
+            <input type="text" name="username" required="" autocomplete="off">
+            <label>Your Name</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="feedback" required="" autocomplete="off">
+            <label>Message</label>
+          </div>
+          <a   onclick="$('#feedback').submit()">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span> Submit</a>
+          <button style="display: none;"></button>
         </form>
-
-        <form action="/feedback" method="GET">
-              <button>Show Reviews</button>
-
-              
-        </form>
-
+       
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
+
+    <form action="/feedback" method="GET" id="comments-form">
+        <button id="view-comments">View Reviews</button>
+        <br>
+        <br>
+    </form>
+    <% if (typeof users !="undefined") { %>
+    <div class="comments-div">
+        <% users.forEach(user => {  %>
+        <p><b><%= user.username %>: </b> <%= user.feedback %> </p>
+        <% }); %> 
+    </div>
+
     
+<script>
+ 
+        $('.comments-div').show();
 
 
+</script>
+    <% } %>
 </main>
