@@ -9,6 +9,8 @@ const layout = require("express-ejs-layouts");
 const PORT = process.env.PORT || 4800;
 const server = express();
 
+server.use(express.urlencoded({ extended: true }));
+
 const override = require("method-override");
 // const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -21,9 +23,13 @@ server.use(express.static("./public"));
 server.get("/", home);
 server.get("/signup", signup);
 server.get("/signin", signin);
+server.get("/ContactUs" , contactUs);
+server.post("/feedback", feedbackHandler);
+server.get("/feedback", reviewskHandler);
 server.get("/details", detailHandler);
 server.get("/search", searchHandler);
 server.get("/databaseinit", databaseinit);
+
 
 function signin(req,res) {
   res.render("pages/login")
@@ -31,6 +37,35 @@ function signin(req,res) {
 function signup(req,res) {
   res.render("pages/signup")
 }
+
+function contactUs (req,res){
+  res.render("pages/ContactUs")
+
+}
+
+function feedbackHandler (req, res){
+  console.log(req.body) ;
+  let SQL =  `INSERT INTO userfeedback (username ,feedback) VALUES ($1 , $2) RETURNING id;`
+  let saveValues = [req.body.username , req.body.feedback] ; 
+   
+  client.query(SQL , saveValues)
+  .then (result =>{
+      console.log("inserted into db");
+
+  })
+}
+
+function reviewskHandler (req,res){
+     let SQL1 = `SELECT * FROM userfeedback;`
+
+     client.query(SQL1)
+     .then(result =>{
+
+        console.log(result);
+     })
+
+}
+
 var movies_ids = [];
 let flag = true;
 
