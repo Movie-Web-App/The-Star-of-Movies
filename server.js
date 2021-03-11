@@ -127,7 +127,7 @@ function FavoriteList(req, res) {
 }
 
 function aboutus(req, res) {
-  res.render("pages/aboutUs")
+  res.render("pages/AboutUs")
 }
 
 function moviespage(req, res) {
