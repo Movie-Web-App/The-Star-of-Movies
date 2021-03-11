@@ -1,9 +1,9 @@
 <main>
 
-    <% if (typeof saveTokenLocally !='undefined' ) { %>
+    <% if (typeof user_id !='undefined' ) { %>
         <script>
             localStorage.setItem('user_id', '<%= user_id %>')
-            localStorage.setItem('user_token', '<%= saveTokenLocally %>')
+
             window.location.replace("/")
         </script>
 

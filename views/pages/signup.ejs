@@ -1,93 +1,117 @@
 <main>
-    <script>
-        if (window.localStorage.getItem('user_token') != null) {
+  <script>
+    if (document.cookie
+      .split('; ')
+      .find(row => row.startsWith('sid=')) != null) {
 
-            window.location.replace("/")
+      window.location.replace("/")
 
-        }
-    </script>
-    <div class="signup-form">
-        <% if (typeof error!='undefined' ) { %>
-            <%= error %>
-                <% } %>
-                    <br>
-                    <br>
-                    <br>
-                    <div id="div-buttons">
-                        <button id="signup-button" class="active-button">Sign Up</button>
-                        <button id="login-button" class="unactive-button">Login</button>
-                    </div>
-                    <form action="/signup" class="signup" method="POST" id="signup-form">
-                        <br>
-                        <br>
-                        <span id="title">Sign Up!</span>
-                        <br>
-                        <br>
-                        <input type="text" name="username" id="username" placeholder="User Name">
-                        <br>
-                        <br>
-                        <input type="email" name="email" id="email" placeholder="E-mail">
-                        <br>
-                        <br>
-                        <input type="password" name="password" id="password" placeholder="Password">
-                        <br>
-                        <br>
-                        <input type="submit" value="Sign Up!" id="submit-signup">
-                        <br>
-                        <br>
-                        <br>
-                    </form>
-
-                    <form action="/signin" class="signup" method="POST" id="login-form">
-                        <% if (typeof error!='undefined' ) { %>
-                            <%= error %>
-                                <% } %>
-                                    <br>
-                                    <br>
-                                    <span id="title">Login!</span>
-                                    <br>
-                                    <br>
-                                    <input type="email" name="email" id="useremail" placeholder="E-mail">
-                                    <br>
-                                    <br>
-                                    <input type="password" name="password" id="password" placeholder="Password">
-                                    <br>
-                                    <br>
-                                    <input type="submit" value="Login" id="submit-signup">
-                                    <br>
-                                    <br>
-                                    <br>
-                    </form>
+    }
+  </script>
 
 
+  <main>
+
+    <div class="login-box">
+      <% if (typeof error!='undefined' ) { %>
+        <p class="error-text">
+          <%= error %>
+        </p>
+        <% } %>
+          <div id="div-buttons">
+            <button id="signup-button" class="active-button">Sign Up</button>
+            <button id="login-button" class="unactive-button">Login</button>
+          </div>
+
+          <form action="/signup" method="POST" id="signup-form">
+            <br>
+            <p id="title">Sign Up</p>
+            <br>
+            <br>
+            <div class="user-box">
+              <input type="text" name="username" required="" autocomplete="off">
+              <label>User Name</label>
+            </div>
+            <div class="user-box">
+              <input type="email" name="email" required="" autocomplete="off">
+              <label>E-mail</label>
+            </div>
+            <div class="user-box">
+              <input type="password" name="password" required="" autocomplete="off">
+              <label>Password</label>
+            </div>
+            <div class="signin-signup-container">
+              <a onclick="$('#signup-form').submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> Sign Up</a>
+            </div>
+            <button style="display: none;"></button>
+          </form>
+
+          <form action="/signin" class="signup" method="POST" id="login-form">
+            <br>
+            <p id="title">Log in</p>
+            <br>
+            <br>
+            <div class="user-box">
+              <input type="email" name="email" required="" value="" autocomplete="off">
+              <label>E-mail</label>
+            </div>
+            <div class="user-box">
+              <input type="password" name="password" required="" autocomplete="off">
+              <label>Password</label>
+            </div>
+            <div class="signin-signup-container">
+              <a onclick="$('#login-form').submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> login</a>
+            </div>
+            <button style="display: none;"></button>
+          </form>
     </div>
-</main>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
-<script>
+  </main>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+  <script>
     $('#login-form').hide();
 
     $('#signup-button').click(() => {
-        $('#signup-form').show();
-        $('#login-form').hide();
+      $('#login-form').hide();
+      $('#signup-form').show();
 
-        $('#login-button').removeClass()
-        $('#signup-button').removeClass()
+      $('#login-button').removeClass()
+      $('#signup-button').removeClass()
 
-        $('#signup-button').addClass("active-button");
-        $('#login-button').addClass("unactive-button");
+      $('#signup-button').addClass("active-button");
+      $('#login-button').addClass("unactive-button");
 
     });
 
     $('#login-button').click(() => {
-        $('#login-form').show();
-        $('#signup-form').hide();
+      $('#signup-form').hide();
+      $('#login-form').show();
 
-        $('#login-button').removeClass()
-        $('#signup-button').removeClass()
+      $('#login-button').removeClass()
+      $('#signup-button').removeClass()
 
-        $('#login-button').addClass("active-button");
-        $('#signup-button').addClass("unactive-button");
+      $('#login-button').addClass("active-button");
+      $('#signup-button').addClass("unactive-button");
 
     });
 
-</script>
+  </script>
+  <% if (typeof error!='undefined' && typeof flag !='undefined' && flag==2) { %>
+
+
+    <script>
+      $('#login-button').click()
+    </script>
+
+    <% }else if (typeof error!='undefined' && typeof flag !='undefined' && flag==1){ %>
+      <script>
+        $('#signup-button').click()
+      </script>
+      <% } %>

@@ -26,31 +26,23 @@
 <body>
     <div id="nav" class="sidenav">
 
-        <!-- THE DIRECT INSIDE SERVER.JS -->
-        <!-- <script>
-            var token = window.localStorage.getItem('user_token');
-
-                if (token) {
-                $.ajaxSetup({
-                    headers: {
-                    'x-access-token': token
-                    }
-                });
-                }
-        </script> -->
-
 
         <script>
-            if (window.localStorage.getItem('user_token') == null)
+
+
+            if (document.cookie
+                .split('; ')
+                .find(row => row.startsWith('sid=')) == null) {
                 $('#nav').append(` <a href="/" class="tooltip"><i class="fa fa-home"></i><span class="tooltiptext">Home</span></a>
         <a href="/signup" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">Signup/Login</span></a>
         
         <a href="/moviespage" class="tooltip"><i class="fas fa-film"></i><span class="tooltiptext">Movies</span></a>
         <a href="/aboutUS" class="tooltip"><i class="fa fa-address-card"></i><span class="tooltiptext">About
             Us</span></a>
-    <a href="/contactUs" class="tooltip"><i class="fa fa-envelope"></i><span class="tooltiptext">Contact
-            Us</span></a>
+
         `)
+
+            }
             else {
                 $('#nav').append(` <a href="/" class="tooltip"><i class="fa fa-home"></i><span class="tooltiptext">Home</span></a>
         <a href="/logout" class="tooltip"><i class="fa fa-user"></i><span class="tooltiptext">Logout</span></a>
@@ -61,8 +53,7 @@
             Us</span></a>
         <a href="/contactUs" class="tooltip"><i class="fa fa-envelope"></i><span class="tooltiptext">Contact
             Us</span></a>
-            <a href="/settings" class="tooltip"><i class="fas fa-cogs"></i><span
-                class="tooltiptext">Settings</span></a>`)
+         `)
             }
         </script>
 

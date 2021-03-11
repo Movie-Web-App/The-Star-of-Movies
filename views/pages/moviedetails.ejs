@@ -5,63 +5,82 @@
 
     <div class="movie_card" id="bright">
 
-        <div class="movie_header">
-          <form action="/FavoriteList/id=<% item.imdb_id %> " method="GET" class="loved-it">
-            <button type="submit" id="favorite-button" class="tooltip"><i class="fas fa-heart"></i><span
-                class="tooltiptext">Add to Favorite List</span></button>
-          </form>
-          <div id="poster">
-            <img class="locandina" src=<%=item.image %> >
-          </div>
-          <br>
-          <div class="header-film">
-            <h1>
-              <%= item.title %>
-            </h1>
-          </div>
-          <br>
-          <h3 class="type"><b>Genra: </b>  <%= item.genre %></h3>
-          
-          <br>
-          <span class="minutes"><b>Duration: </b> <b>
-              <%= item.runtime %> Minutes
-            </b> </span>
-          <br>
-          <br>
-          <h4 class="year-released"><B>Year Released: </B><b>
-              <%= item.year %>
-            </b></h4>
-          <br>
-          <h3> &bigstar;&bigstar; <b>Ratings</b> &bigstar;&bigstar;</h3>
-          <h5><B>IMDB Rating: </B><b>
-              <%= item.imdb_rate %>/10
-            </b></h5>
-          <h5><B>Metacritic Rating: </B><b>
-              <%= item.metacritic_rate %>/100
-            </b></h5>
-          <div class="plot">
-            <p ><b class="plot-prefix">Plot: </b>
-              <%= item.plot %>
-            </p>
-            <br>
-            <br>
-          </div>
-          <div class="rating rating2">
-            <a href="#5" title="Give 5 stars">★</a>
-            <a href="#4" title="Give 4 stars">★</a>
-            <a href="#3" title="Give 3 stars">★</a>
-            <a href="#2" title="Give 2 stars">★</a>
-            <a href="#1" title="Give 1 star">★</a>
-            <br>
-            <br>
-          </div>
+      <div class="movie_header" id="movie_header">
+        <script>
+
+          if (document.cookie
+            .split('; ')
+            .find(row => row.startsWith('sid=')) != null) {
+
+            $("#movie_header").append(`<form action="/FavoriteList "  method="post" class="loved-it">
+             <input type="hidden" name="imdb_id" value="<%= item.imdb_id %>">
+             <input type="hidden" name="user_id" id="user_id" value="">
+        <button type="submit" id="favorite-button" class="tooltip"><i class="fas fa-heart"></i><span
+            class="tooltiptext">Add to Favorite List</span></button>
+      </form>`)
+
+
+          }
+
+
+          $("#user_id").val(localStorage.getItem('user_id'))
+        </script>
+
+
+        </script>
+
+        <div id="poster">
+          <img class="locandina" src=<%=item.image %> >
         </div>
- 
+        <br>
+        <div class="header-film">
+          <h1>
+            <%= item.title %>
+          </h1>
+        </div>
+        <br>
+        <h3 class="type"><b>Genra: </b>
+          <%= item.genre %>
+        </h3>
+
+        <br>
+        <span class="minutes"><b>Duration: </b> <b>
+            <%= item.runtime %> Minutes
+          </b> </span>
+        <br>
+        <br>
+        <h4 class="year-released"><B>Year Released: </B><b>
+            <%= item.year %>
+          </b></h4>
+        <br>
+        <h3> &bigstar;&bigstar; <b>Ratings</b> &bigstar;&bigstar;</h3>
+        <h5><B>IMDB Rating: </B><b>
+            <%= item.imdb_rate %>/10
+          </b></h5>
+        <h5><B>Metacritic Rating: </B><b>
+            <%= item.metacritic_rate %>/100
+          </b></h5>
+        <div class="plot">
+          <p><b class="plot-prefix">Plot: </b>
+            <%= item.plot %>
+          </p>
+          <br>
+          <br>
+        </div>
+        <div class="rating rating2">
+          <a href="#5" title="Give 5 stars">★</a>
+          <a href="#4" title="Give 4 stars">★</a>
+          <a href="#3" title="Give 3 stars">★</a>
+          <a href="#2" title="Give 2 stars">★</a>
+          <a href="#1" title="Give 1 star">★</a>
+          <br>
+          <br>
+        </div>
+      </div>
+
     </div>
     <div class="video-div">
-      <iframe width="860" height="409" src="<%= item.trailer%>" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+      <iframe width="860" height="409" src="<%= item.trailer%>" frameborder="0" allowfullscreen></iframe>
     </div>
     <%}) %>
 

@@ -1,10 +1,11 @@
+
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS users_favorite_list;
 DROP TABLE IF EXISTS userfeedback;
 
 CREATE TABLE  movies (
-  Id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   imdb_id TEXT,
   title TEXT,
   year TEXT,
@@ -15,10 +16,10 @@ CREATE TABLE  movies (
   actors TEXT,
   plot TEXT,
   trailer TEXT,
-  imDb_rate TEXT,
+  imdb_rate TEXT,
 metacritic_rate TEXT,
-theMovieDb_rate TEXT,
-rottenTomatoes_rate TEXT
+themoviedb_rate TEXT,
+rottentomatoes_rate TEXT
 );
 
 CREATE TABLE users (
@@ -31,19 +32,10 @@ CREATE TABLE users (
 
   -- add foreign key related to the user id
   -- insert movies
-CREATE TABLE users_favorite_list (
-  id SERIAL PRIMARY KEY,
-  movie_id int,
-  user_id_fk int
-  
-);
+CREATE TABLE users_favorite_list (  id SERIAL PRIMARY KEY,  movie_id text,  user_id_fk int );
 
--- ALTER TABLE users_favorite_list ADD CONSTRAINT FOREIGN KEY (user_id_fk)  REFERENCES  users(id);
 
-CREATE TABLE userfeedback (
-id SERIAL PRIMARY KEY, 
-username TEXT,
-feedback TEXT
-);
+
+CREATE TABLE userfeedback (id SERIAL PRIMARY KEY, username TEXT,feedback TEXT);
 
 
