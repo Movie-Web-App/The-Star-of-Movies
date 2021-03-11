@@ -1,17 +1,20 @@
-    <main>
-        <div class="login-form">
-            <form action="/movies" class="signup" method="POST">
-                <br>
-                <br>
-                <input type="text" name="userEmail" id="userEmail" placeholder="User Name or E-mail">
-                <br>
-                <br>
-                <input type="password" name="password" id="password" placeholder="Password">
-                <br>
-                <br>
-                <input type="submit" value="Login" id="submit-login">
-                <br>
-                <br>
-            </form>
-        </div>
-    </main>
+<main>
+    <div class="login-form">
+        <% if (typeof error!='undefined' ) { %>
+            <%= error %>
+                <% } %>
+                    <form action="/signin" class="signup" method="POST">
+                        <br>
+                        <br>
+                        <input type="text" name="userEmail" id="userEmail" placeholder="User Name or E-mail">
+                        <br>
+                        <br>
+                        <input type="password" name="password" id="password" placeholder="Password">
+                        <br>
+                        <br>
+                        <input type="submit" value="Login" id="submit-login">
+                        <br>
+                        <br>
+                    </form>
+    </div>
+</main>

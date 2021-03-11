@@ -1,88 +1,117 @@
-   <main>
-        <!-- <div  class="signup-form"> -->
-            <div class="login-box">
-            
-            <div id="div-buttons">
-                <button id="signup-button" class="active-button">Sign Up</button> 
-                <button id="login-button" class="unactive-button">Login</button>
+<main>
+  <script>
+    if (document.cookie
+      .split('; ')
+      .find(row => row.startsWith('sid=')) != null) {
+
+      window.location.replace("/")
+
+    }
+  </script>
+
+
+  <main>
+
+    <div class="login-box">
+      <% if (typeof error!='undefined' ) { %>
+        <p class="error-text">
+          <%= error %>
+        </p>
+        <% } %>
+          <div id="div-buttons">
+            <button id="signup-button" class="active-button">Sign Up</button>
+            <button id="login-button" class="unactive-button">Login</button>
+          </div>
+
+          <form action="/signup" method="POST" id="signup-form">
+            <br>
+            <p id="title">Sign Up</p>
+            <br>
+            <br>
+            <div class="user-box">
+              <input type="text" name="username" required="" autocomplete="off">
+              <label>User Name</label>
             </div>
-               
-            <form action="/movies" method="POST" id="signup-form">
-                <br>
-                <span id="title">Sign Up!</span>
-                <br>
-                <br>
-                  <div class="user-box">
-                    <input type="text" name="username" required="">
-                    <label>User Name</label>
-                  </div>
-                  <div class="user-box">
-                    <input type="email" name="email" required="">
-                    <label>E-mail</label>
-                  </div>
-                  <div class="user-box">
-                    <input type="password" name="password" required="">
-                    <label>Password</label>
-                  </div>
-                  <a   onclick="$('#signup-form').submit()">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span> Sign Up!</a>
-                  <button style="display: none;"></button>
-                </form>
-               
-                <form action="/movies" class="signup" method="POST" id="login-form">
-                    <br>
-                  <span id="title">Log in!</span>
-                  <br>
-                  <br>
-                    <div class="user-box">
-                      <input type="email" name="username" required="" value="">
-                      <label>E-mail</label>
-                    </div>
-                    <div class="user-box">
-                      <input type="password" name="password" required="">
-                      <label>Password</label>
-                    </div>
-                    <a   onclick="$('#login-form').submit()">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                      <span></span> Sign Up!</a>
-                      <button style="display: none;"></button>
-                    </form>
-              </div>
-            
+            <div class="user-box">
+              <input type="email" name="email" required="" autocomplete="off">
+              <label>E-mail</label>
             </div>
+            <div class="user-box">
+              <input type="password" name="password" required="" autocomplete="off">
+              <label>Password</label>
+            </div>
+            <div class="signin-signup-container">
+              <a onclick="$('#signup-form').submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> Sign Up</a>
+            </div>
+            <button style="display: none;"></button>
+          </form>
+
+          <form action="/signin" class="signup" method="POST" id="login-form">
+            <br>
+            <p id="title">Log in</p>
+            <br>
+            <br>
+            <div class="user-box">
+              <input type="email" name="email" required="" value="" autocomplete="off">
+              <label>E-mail</label>
+            </div>
+            <div class="user-box">
+              <input type="password" name="password" required="" autocomplete="off">
+              <label>Password</label>
+            </div>
+            <div class="signin-signup-container">
+              <a onclick="$('#login-form').submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> login</a>
+            </div>
+            <button style="display: none;"></button>
+          </form>
     </div>
-    </main>
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
-        <script>
-            $('#login-form').hide();
-            
-            $('#signup-button').click(()=>{
-                $('#signup-form').show();
-                $('#login-form').hide();
+  </main>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+  <script>
+    $('#login-form').hide();
 
-                $('#login-button').removeClass()
-                $('#signup-button').removeClass()
-                
-                $('#signup-button').addClass("active-button");
-                $('#login-button').addClass("unactive-button");
+    $('#signup-button').click(() => {
+      $('#login-form').hide();
+      $('#signup-form').show();
 
-            });
-            
-            $('#login-button').click(()=>{
-                $('#login-form').show();
-                $('#signup-form').hide();
+      $('#login-button').removeClass()
+      $('#signup-button').removeClass()
 
-                $('#login-button').removeClass()
-                $('#signup-button').removeClass()
+      $('#signup-button').addClass("active-button");
+      $('#login-button').addClass("unactive-button");
 
-                $('#login-button').addClass("active-button");
-                $('#signup-button').addClass("unactive-button");
+    });
 
-            });
-            
-        </script>
+    $('#login-button').click(() => {
+      $('#signup-form').hide();
+      $('#login-form').show();
+
+      $('#login-button').removeClass()
+      $('#signup-button').removeClass()
+
+      $('#login-button').addClass("active-button");
+      $('#signup-button').addClass("unactive-button");
+
+    });
+
+  </script>
+  <% if (typeof error!='undefined' && typeof flag !='undefined' && flag==2) { %>
+
+
+    <script>
+      $('#login-button').click()
+    </script>
+
+    <% }else if (typeof error!='undefined' && typeof flag !='undefined' && flag==1){ %>
+      <script>
+        $('#signup-button').click()
+      </script>
+      <% } %>
